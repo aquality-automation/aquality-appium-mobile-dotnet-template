@@ -2,7 +2,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'macOS 10.14'
+  vmImage: 'macOS-latest'
 
 variables:
   isRemote: false
@@ -18,15 +18,15 @@ variables:
   IOS_DEVICE_NAME: iPhone X
 
 steps:
-- task: UseDotNet@2
-  inputs:
-    version: '2.1.x'
+#- task: UseDotNet@2
+#  inputs:
+#    version: '2.1.x'
     
-- task: NuGetToolInstaller@1
+#- task: NuGetToolInstaller@1
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
+#- task: NuGetCommand@2
+#  inputs:
+#    restoreSolution: '$(solution)'
 
 - task: SonarCloudPrepare@1
   displayName: 'Prepare SonarCloud analysis'

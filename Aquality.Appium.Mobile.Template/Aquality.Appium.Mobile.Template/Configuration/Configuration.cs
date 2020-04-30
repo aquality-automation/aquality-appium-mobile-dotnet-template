@@ -2,7 +2,7 @@
 
 namespace Aquality.Appium.Mobile.Template.Configuration
 {
-    public class Configuration
+    public static class Configuration
     {
         public static string ConfigurationValue => CurrentEnvironment.GetValue<string>("configurationValue");
 
