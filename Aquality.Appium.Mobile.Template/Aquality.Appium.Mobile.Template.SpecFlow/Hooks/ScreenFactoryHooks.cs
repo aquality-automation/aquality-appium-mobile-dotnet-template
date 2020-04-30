@@ -16,7 +16,7 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
         }
 
         [BeforeScenario]
-        public void InitializeScreenFactory()
+        public void RegisterScreenFactory()
         {
             if (!objectContainer.IsRegistered<IScreenFactory>())
             {
