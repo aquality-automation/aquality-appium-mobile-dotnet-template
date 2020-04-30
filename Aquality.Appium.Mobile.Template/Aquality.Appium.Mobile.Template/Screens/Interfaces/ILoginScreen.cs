@@ -1,7 +1,13 @@
-﻿namespace Aquality.Appium.Mobile.Template.Screens.Interfaces
+﻿using Aquality.Appium.Mobile.Screens;
+
+namespace Aquality.Appium.Mobile.Template.Screens.Interfaces
 {
-    public interface ILoginScreen
+    public interface ILoginScreen : IScreen
     {
-        string Login();
+        ILoginScreen SetUsername(string username);
+
+        ILoginScreen SetPassword(string password);
+
+        void TapLogin();
     }
 }

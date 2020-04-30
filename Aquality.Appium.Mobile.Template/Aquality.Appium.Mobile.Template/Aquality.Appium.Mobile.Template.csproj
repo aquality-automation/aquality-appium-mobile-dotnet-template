@@ -5,16 +5,30 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aquality.Appium.Mobile" Version="0.2.0" />
+    <None Remove="Resources\Environment\Prod\config.json" />
+    <None Remove="Resources\Environment\Stage\config.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Configuration\" />
-    <Folder Include="Models\" />
+    <EmbeddedResource Include="Resources\Environment\Prod\config.json" />
+    <EmbeddedResource Include="Resources\Environment\Stage\config.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aquality.Appium.Mobile" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Resources\Applications\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\Applications\TheApp-v1.10.0.apk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Applications\TheApp-v1.10.0.app.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
