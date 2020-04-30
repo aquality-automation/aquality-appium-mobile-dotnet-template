@@ -40,11 +40,6 @@ steps:
   displayName: 'Publish SonarCloud quality gate results'
   continueOnError: true
 
-#- task: NodeTool@0
-#  displayName: 'Install Node.js tool to setup Appium and emulators'
-#  inputs:
-#    versionSpec: '11.15.0'
-
 - task: CmdLine@2
   displayName: 'Configure Appium and Android SDK'
   inputs:
