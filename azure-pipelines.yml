@@ -39,8 +39,14 @@ steps:
     extraProperties: |
       sonar.coverage.exclusions=**/**
 
-- script: dotnet build Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.sln -c $(buildConfiguration)
-  displayName: 'Build solution - $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: 'Build solution'
+  env: 
+    MSBUILDSINGLELOADCONTEXT: 1  # https://github.com/SpecFlowOSS/SpecFlow/issues/1912
+  inputs:
+    command: 'build'
+    projects: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.sln
+    arguments: -c $(buildConfiguration)
 
 - task: SonarCloudAnalyze@1
   displayName: 'Run SonarCloud code analysis'
@@ -109,19 +115,6 @@ steps:
     projects: '**/Aquality.Appium.Mobile.Template.SpecFlow.csproj'
     arguments: -c $(buildConfiguration) --no-build
     publishTestResults: true
-
-#- script: |
-#    echo "##vso[task.setvariable variable=isRemote;]true"
-#    appium --allow-insecure chromedriver_autodownload &
-#    echo "Appium server started"
-
-#- task: DotNetCoreCLI@2
-#  displayName: 'Run tests using manually started (remote) server'
-#  inputs:
-#    command: 'test'
-#    projects: '**/*Tests*/*.csproj'
-#    arguments: -c $(buildConfiguration) --no-build
-#    publishTestResults: true
 
 - task: CopyFiles@2
   displayName: 'Copy failure screenshots and test logs'
