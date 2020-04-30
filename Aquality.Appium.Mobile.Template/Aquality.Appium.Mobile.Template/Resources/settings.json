@@ -13,7 +13,7 @@
         "automationName": "UiAutomator2",
         "appPackage": "io.cloudgrey.the_app",
         "appActivity": "io.cloudgrey.the_app.MainActivity",
-        "adbExecTimeout": 5000
+        "adbExecTimeout": 10000
       }
     },
     "ios": {

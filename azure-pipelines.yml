@@ -92,9 +92,8 @@ steps:
     appium --version
     appium-doctor
 
-- script: |
     echo "##vso[task.setvariable variable=isRemote;]true"
-    appium --allow-insecure chromedriver_autodownload &
+    appium -a 127.0.0.1 -p 4723 --allow-insecure chromedriver_autodownload &
     echo "Appium server started"
 
 - task: DotNetCoreCLI@2
