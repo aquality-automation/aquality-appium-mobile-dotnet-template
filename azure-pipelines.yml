@@ -1,6 +1,9 @@
 trigger:
 - master
 
+pool:
+  vmImage: 'macOS-latest'
+
 variables:
     buildConfiguration: 'Release'
 
@@ -8,9 +11,6 @@ jobs:
 - job: sonar
   displayName: Analyse code with SonarQube
 
-  pool:
-    vmImage: 'macOS-latest'
-  
   steps:
   - task: SonarCloudPrepare@1
     displayName: 'Prepare SonarCloud analysis'
@@ -42,9 +42,6 @@ jobs:
 - job: tests
   displayName: Run tests
 
-  pool:
-    vmImage: 'macOS-latest'
-
   variables:
     ANDROID_EMU_NAME: test
     ANDROID_EMU_ABI: x86
@@ -66,7 +63,6 @@ jobs:
         echo export "ANDROID_HOME=\$ANDROID_HOME" >> ~/.bash_profile
         export PATH=$PATH:$ANDROID_HOME
 
-        mvn -version
         echo $ANDROID_HOME
         echo $JAVA_HOME
         echo $PATH
@@ -102,6 +98,10 @@ jobs:
         appium --version
         appium-doctor
 
+  - task: CmdLine@2
+    displayName: 'Start Appium server'
+    inputs:
+      script: |
         appium -a 127.0.0.1 -p 4723 --allow-insecure chromedriver_autodownload &
         echo "Appium server started"
 
