@@ -13,10 +13,6 @@ namespace Aquality.Appium.Mobile.Template.Screens.Android
 
         public ILoginScreen SetUsername(string username)
         {
-            string str = null; // TODO: check sonar
-            var l = str.Length;
-
-
             ElementFactory.GetTextBox(MobileBy.AccessibilityId("username"), "Username").SendKeys(username);
             return this;
         }
