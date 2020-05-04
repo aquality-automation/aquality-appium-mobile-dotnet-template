@@ -55,10 +55,9 @@ jobs:
 
   steps:
   - task: CmdLine@2
-    displayName: 'Configure Appium and Android SDK'
+    displayName: 'Configuring Environment with Appium'
     inputs:
       script: |
-        echo "Configuring Environment"
         echo $JAVA_HOME
         ls /Library/Java/JavaVirtualMachines/
 
@@ -74,6 +73,15 @@ jobs:
 
         node --version
         npm -version
+
+        echo "Prepare and start Android emulator"
+        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)'
+        echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n "$(ANDROID_EMU_NAME)" -k 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)' --force
+        echo $ANDROID_HOME/emulator/emulator -list-avds
+        nohup $ANDROID_HOME/emulator/emulator -avd "$(ANDROID_EMU_NAME)" -no-snapshot > /dev/null 2>&1 &
+        $ANDROID_HOME/platform-tools/adb wait-for-device
+        while [[ $? -ne 0 ]]; do sleep 1; $ANDROID_HOME/platform-tools/adb shell pm list packages; done;
+        $ANDROID_HOME/platform-tools/adb devices
 
         echo "Installing Appium"   
         npm install -g appium@v1.17.0
@@ -92,18 +100,18 @@ jobs:
         export PATH=$PATH:/usr/local/bin/appium-doctor
         appium-doctor
 
-  - task: CmdLine@2
-    displayName: 'Prepare and start Android emulator'
-    inputs:
-      script: |
-        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)'
-        echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n "$(ANDROID_EMU_NAME)" -k 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)' --force
-        echo $ANDROID_HOME/emulator/emulator -list-avds
-        nohup $ANDROID_HOME/emulator/emulator -avd "$(ANDROID_EMU_NAME)" -no-snapshot > /dev/null 2>&1 &
-        $ANDROID_HOME/platform-tools/adb wait-for-device
-        while [[ $? -ne 0 ]]; do sleep 1; $ANDROID_HOME/platform-tools/adb shell pm list packages; done;
-        $ANDROID_HOME/platform-tools/adb devices
-    condition: and(succeeded(), eq(variables['platformName'], 'android'))
+  #- task: CmdLine@2
+  #  displayName: 'Prepare and start Android emulator'
+  #  inputs:
+  #    script: |
+  #      echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)'
+  #      echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n "$(ANDROID_EMU_NAME)" -k 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)' --force
+  #      echo $ANDROID_HOME/emulator/emulator -list-avds
+  #      nohup $ANDROID_HOME/emulator/emulator -avd "$(ANDROID_EMU_NAME)" -no-snapshot > /dev/null 2>&1 &
+  #      $ANDROID_HOME/platform-tools/adb wait-for-device
+  #      while [[ $? -ne 0 ]]; do sleep 1; $ANDROID_HOME/platform-tools/adb shell pm list packages; done;
+  #      $ANDROID_HOME/platform-tools/adb devices
+  #  condition: and(succeeded(), eq(variables['platformName'], 'android'))
 
   - task: CmdLine@2
     displayName: 'Prepare and start iOS Simulator'
