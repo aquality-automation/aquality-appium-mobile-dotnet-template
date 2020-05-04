@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aquality.Appium.Mobile" Version="1.1.0" />
+    <PackageReference Include="Aquality.Appium.Mobile" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
