@@ -24,6 +24,6 @@ namespace Aquality.Appium.Mobile.Template.Screens.IOS
             return this;
         }
 
-        public void TapLogin() => ElementFactory.GetButton(MobileBy.IosClassChain("**/XCUIElementTypeOther[`name == 'loginBtn'`]"), "Login").Click();
+        public void TapLogin() => ElementFactory.GetButton(MobileBy.IosClassChain("**/XCUIElementTypeOther[`name == 'loginBtn'`][2]"), "Login").Click();
     }
 }
