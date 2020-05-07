@@ -57,11 +57,8 @@ jobs:
   - task: CmdLine@2
     displayName: 'Configuring Environment with Appium'
     inputs:
-      script: |
-        echo "Test xcrun"
-        xcrun instruments -s
+      script: |        
         echo "Configuring Environment"
-        echo $JAVA_HOME
         ls /Library/Java/JavaVirtualMachines/
 
         ls $ANDROID_HOME/build-tools/
@@ -74,7 +71,7 @@ jobs:
         echo "JAVA_HOME: ${JAVA_HOME}"
         echo "PATH: ${PATH}"
 
-        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)'
+        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;$(ANDROID_EMU_TARGE);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)'
         echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n "$(ANDROID_EMU_NAME)" -k 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)' --force
         echo $ANDROID_HOME/emulator/emulator -list-avds
 
@@ -86,8 +83,8 @@ jobs:
         echo "Emulator started"
 
         echo "Installing Appium"
-        node --version
-        npm -version
+        echo "node version: ${node --version}"
+        echo "npm version: ${npm -version}"
         npm list --depth 0
         npm install -g appium@v1.17.0
         # --chromedriver-skip-install
@@ -107,6 +104,9 @@ jobs:
         appium --version
         appium-doctor
 
+        #echo "Test xcrun"
+        #xcrun instruments -s
+        #xcrun instruments -w "iPhone 11 (13.4.1)" - wait for simulator started
         #sudo xcode-select -s /Applications/Xcode_$(XCODE_VERSION).app/Contents/Developer
         #xcrun simctl list
 
@@ -137,6 +137,7 @@ jobs:
       projects: '**/Aquality.Appium.Mobile.Template.SpecFlow.csproj'
       arguments: -c $(buildConfiguration)
       publishTestResults: true
+    condition: and(succeeded(), eq(variables['platformName'], 'ios'))
 
   - task: CopyFiles@2
     displayName: 'Copy failure screenshots and test logs'
