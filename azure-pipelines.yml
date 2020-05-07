@@ -49,7 +49,7 @@ jobs:
 
   variables:
     ANDROID_EMU_NAME: test
-    ANDROID_EMU_ABI: x86
+    ANDROID_EMU_ABI: x86_64
     ANDROID_EMU_TARGET: android-28
     ANDROID_EMU_TAG: google_apis
 
@@ -70,8 +70,7 @@ jobs:
         echo "JAVA_HOME: ${JAVA_HOME}"
         echo "PATH: ${PATH}"
 
-        $ANDROID_HOME/tools/bin/sdkmanager --list --verbose
-        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)'
+        #echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)'
         echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n "$(ANDROID_EMU_NAME)" -k 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)' --force
         echo $ANDROID_HOME/emulator/emulator -list-avds
 
