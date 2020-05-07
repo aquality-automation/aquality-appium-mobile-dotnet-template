@@ -58,6 +58,7 @@ jobs:
     displayName: 'Configuring Environment with Appium'
     inputs:
       script: |
+        echo "Configuring Environment"
         echo $JAVA_HOME
         ls /Library/Java/JavaVirtualMachines/
 
@@ -71,47 +72,41 @@ jobs:
         echo $JAVA_HOME
         echo $PATH
 
-        node --version
-        npm -version
-
-        echo "Prepare and start Android emulator"
         echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)'
         echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n "$(ANDROID_EMU_NAME)" -k 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)' --force
         echo $ANDROID_HOME/emulator/emulator -list-avds
+
+        echo "Starting emulator"
         nohup $ANDROID_HOME/emulator/emulator -avd "$(ANDROID_EMU_NAME)" -no-snapshot > /dev/null 2>&1 &
         $ANDROID_HOME/platform-tools/adb wait-for-device
         while [[ $? -ne 0 ]]; do sleep 1; $ANDROID_HOME/platform-tools/adb shell pm list packages; done;
         $ANDROID_HOME/platform-tools/adb devices
+        echo "Emulator started"
 
-        echo "Installing Appium"   
-        npm install -g appium@v1.17.0
+        echo "Installing Appium"
+        node --version
+        npm -version
         npm list --depth 0
+        npm install -g appium@v1.17.0
+        # --chromedriver-skip-install
         ln -fs /usr/local/lib/node_modules/appium/build/lib/main.js /usr/local/bin/appium
         chmod +x /usr/local/bin/appium
         export PATH=$PATH:/usr/local/bin/appium
-        appium --version
 
         echo "Installing and Running Appium doctor"
         npm install -g request@2.34.0
         npm install -g appium-doctor@1.15.1
-        npm list --depth 0
         ln -fs /usr/local/lib/node_modules/appium-doctor/appium-doctor.js /usr/local/bin/appium-doctor
         chmod +x /usr/local/bin/appium-doctor
         export PATH=$PATH:/usr/local/bin/appium-doctor
+
+        npm list --depth 0
+
+        appium --version
         appium-doctor
 
-  #- task: CmdLine@2
-  #  displayName: 'Prepare and start Android emulator'
-  #  inputs:
-  #    script: |
-  #      echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)'
-  #      echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n "$(ANDROID_EMU_NAME)" -k 'system-images;$(ANDROID_EMU_TARGET);$(ANDROID_EMU_TAG);$(ANDROID_EMU_ABI)' --force
-  #      echo $ANDROID_HOME/emulator/emulator -list-avds
-  #      nohup $ANDROID_HOME/emulator/emulator -avd "$(ANDROID_EMU_NAME)" -no-snapshot > /dev/null 2>&1 &
-  #      $ANDROID_HOME/platform-tools/adb wait-for-device
-  #      while [[ $? -ne 0 ]]; do sleep 1; $ANDROID_HOME/platform-tools/adb shell pm list packages; done;
-  #      $ANDROID_HOME/platform-tools/adb devices
-  #  condition: and(succeeded(), eq(variables['platformName'], 'android'))
+        #sudo xcode-select -s /Applications/Xcode_$(XCODE_VERSION).app/Contents/Developer
+        #xcrun simctl list
 
   - task: CmdLine@2
     displayName: 'Prepare and start iOS Simulator'
