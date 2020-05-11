@@ -1,5 +1,5 @@
 ﻿using Aquality.Appium.Mobile.Applications;
-using Aquality.Appium.Mobile.Screens.ScreenFactory;
+using Aquality.Appium.Mobile.Template.Utilities;
 using BoDi;
 using TechTalk.SpecFlow;
 
@@ -18,10 +18,8 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
         [BeforeScenario]
         public void RegisterScreenFactory()
         {
-            if (!objectContainer.IsRegistered<IScreenFactory>())
-            {
-                objectContainer.RegisterInstanceAs(AqualityServices.ScreenFactory);
-            }
+            objectContainer.RegisterInstanceAs(AqualityServices.ScreenFactory);
+            objectContainer.RegisterInstanceAs(new ScreenshotProvider());
         }
     }
 }

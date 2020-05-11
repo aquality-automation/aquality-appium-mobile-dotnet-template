@@ -9,10 +9,10 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
     [Binding]
     public class ScreenshotHooks
     {
-        private readonly ScreenshotProvider screenshotProvider;
         private readonly ScenarioContext scenarioContext;
+        private readonly IScreenshotProvider screenshotProvider;
 
-        public ScreenshotHooks(ScenarioContext scenarioContext, ScreenshotProvider screenshotProvider)
+        public ScreenshotHooks(ScenarioContext scenarioContext, IScreenshotProvider screenshotProvider)
         {
             this.scenarioContext = scenarioContext;
             this.screenshotProvider = screenshotProvider;
