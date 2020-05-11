@@ -1,4 +1,5 @@
 ﻿using Aquality.Appium.Mobile.Applications;
+using Aquality.Appium.Mobile.Screens.ScreenFactory;
 using Aquality.Appium.Mobile.Template.Utilities;
 using BoDi;
 using TechTalk.SpecFlow;
@@ -6,20 +7,20 @@ using TechTalk.SpecFlow;
 namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
 {
     [Binding]
-    public class ScreenFactoryHooks
+    public class ObjectContainerHooks
     {
         private readonly IObjectContainer objectContainer;
 
-        public ScreenFactoryHooks(IObjectContainer objectContainer)
+        public ObjectContainerHooks(IObjectContainer objectContainer)
         {
             this.objectContainer = objectContainer;
         }
 
         [BeforeScenario]
-        public void RegisterScreenFactory()
+        public void RegisterDependencies()
         {
-            objectContainer.RegisterInstanceAs(AqualityServices.ScreenFactory);
-            objectContainer.RegisterInstanceAs(new ScreenshotProvider());
+            objectContainer.RegisterInstanceAs<IScreenFactory>(AqualityServices.ScreenFactory);
+            objectContainer.RegisterInstanceAs<IScreenshotProvider>(new ScreenshotProvider());
         }
     }
 }
