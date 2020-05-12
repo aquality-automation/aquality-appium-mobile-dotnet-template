@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Aquality.Appium.Mobile.Template.Utilities
 {
-    public class ScreenshotProvider
+    public class ScreenshotProvider : IScreenshotProvider
     {
         public string TakeScreenshot()
         {
