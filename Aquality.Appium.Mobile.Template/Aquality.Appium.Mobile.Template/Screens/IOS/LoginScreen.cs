@@ -1,37 +1,21 @@
-﻿using Aquality.Appium.Mobile.Elements.Interfaces;
-using Aquality.Appium.Mobile.Screens;
-using Aquality.Appium.Mobile.Template.Screens.Interfaces;
+﻿using Aquality.Appium.Mobile.Applications;
+using Aquality.Appium.Mobile.Screens.ScreenFactory;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 
 namespace Aquality.Appium.Mobile.Template.Screens.IOS
 {
-    public class LoginScreen : IOSScreen, ILoginScreen
+    [ScreenType(PlatformName.IOS)]
+    public sealed class LoginScreen : Base.LoginScreen
     {
-        private const string ScreenName = "Login";
-
-        private readonly ITextBox usernameTxb;
-        private readonly ITextBox passwordTxb;
-        private readonly IButton loginBtn;
-
-        public LoginScreen() : base(MobileBy.AccessibilityId(ScreenName), ScreenName)
+        public LoginScreen() : base(MobileBy.AccessibilityId("Login"))
         {
-            usernameTxb = ElementFactory.GetTextBox(MobileBy.IosNSPredicate("type == 'XCUIElementTypeTextField' AND name == 'username'"), "Username");
-            passwordTxb = ElementFactory.GetTextBox(MobileBy.IosNSPredicate("type == 'XCUIElementTypeSecureTextField' AND name == 'password'"), "Password");
-            loginBtn = ElementFactory.GetButton(MobileBy.IosClassChain("**/XCUIElementTypeOther[`name == 'loginBtn'`][2]"), "Login");
         }
 
-        public ILoginScreen SetUsername(string username)
-        {
-            usernameTxb.SendKeys(username);
-            return this;
-        }
+        protected override By UsernameTxbLoc => MobileBy.IosNSPredicate("type == 'XCUIElementTypeTextField' AND name == 'username'");
 
-        public ILoginScreen SetPassword(string password)
-        {
-            passwordTxb.TypeSecret(password);
-            return this;
-        }
+        protected override By PasswordTxbLoc => MobileBy.IosNSPredicate("type == 'XCUIElementTypeSecureTextField' AND name == 'password'");
 
-        public void TapLogin() => loginBtn.Click();
+        protected override By LoginBtnLoc => MobileBy.IosClassChain("**/XCUIElementTypeOther[`name == 'loginBtn'`][2]");
     }
 }

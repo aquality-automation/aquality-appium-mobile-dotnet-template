@@ -1,22 +1,18 @@
-﻿using Aquality.Appium.Mobile.Elements.Interfaces;
-using Aquality.Appium.Mobile.Screens;
+﻿using Aquality.Appium.Mobile.Applications;
+using Aquality.Appium.Mobile.Screens.ScreenFactory;
 using OpenQA.Selenium;
 
 namespace Aquality.Appium.Mobile.Template.Screens.Android
 {
-    public class Alert : AndroidScreen, Interfaces.IAlert
+    [ScreenType(PlatformName.Android)]
+    public sealed class Alert : Base.Alert
     {
-        private readonly ILabel messageLbl;
-        private readonly IButton okBtn;
-
-        public Alert() : base(By.Id("android:id/alertTitle"), "Alert")
+        public Alert() : base(By.Id("android:id/alertTitle"))
         {
-            messageLbl = ElementFactory.GetLabel(By.Id("android:id/message"), "Message");
-            okBtn = ElementFactory.GetButton(By.Id("android:id/button1"), "OK");
         }
 
-        public string Message => messageLbl.Text;
+        protected override By MessageLblLoc => By.Id("android:id/message");
 
-        public void TapOk() => okBtn.Click();
+        protected override By OkBtnLoc => By.Id("android:id/button1");
     }
 }

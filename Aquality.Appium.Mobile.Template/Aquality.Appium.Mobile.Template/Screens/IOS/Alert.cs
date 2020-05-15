@@ -1,22 +1,19 @@
-﻿using Aquality.Appium.Mobile.Elements.Interfaces;
-using Aquality.Appium.Mobile.Screens;
+﻿using Aquality.Appium.Mobile.Applications;
+using Aquality.Appium.Mobile.Screens.ScreenFactory;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 
 namespace Aquality.Appium.Mobile.Template.Screens.IOS
 {
-    public class Alert : IOSScreen, Interfaces.IAlert
+    [ScreenType(PlatformName.IOS)]
+    public sealed class Alert : Base.Alert
     {
-        private readonly ILabel messageLbl;
-        private readonly IButton okBtn;
-
-        public Alert() : base(MobileBy.IosNSPredicate("type == 'XCUIElementTypeAlert' AND name == 'Alert'"), "Alert")
+        public Alert() : base(MobileBy.IosNSPredicate("type == 'XCUIElementTypeAlert' AND name == 'Alert'"))
         {
-            messageLbl = ElementFactory.GetLabel(MobileBy.IosClassChain("**/XCUIElementTypeOther[$name == 'Alert'$]/XCUIElementTypeStaticText[2]"), "Message");
-            okBtn = ElementFactory.GetButton(MobileBy.AccessibilityId("OK"), "OK");
         }
 
-        public string Message => messageLbl.Text;
+        protected override By MessageLblLoc => MobileBy.IosClassChain("**/XCUIElementTypeOther[$name == 'Alert'$]/XCUIElementTypeStaticText[2]");
 
-        public void TapOk() => okBtn.Click();
+        protected override By OkBtnLoc => MobileBy.AccessibilityId("OK");
     }
 }

@@ -1,18 +1,14 @@
-﻿using Aquality.Appium.Mobile.Screens;
-using Aquality.Appium.Mobile.Template.Screens.Interfaces;
+﻿using Aquality.Appium.Mobile.Applications;
+using Aquality.Appium.Mobile.Screens.ScreenFactory;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Appium;
 
 namespace Aquality.Appium.Mobile.Template.Screens.Android
 {
-    public class ChooseViewScreen : AndroidScreen, IChooseViewScreen
+    [ScreenType(PlatformName.Android)]
+    public sealed class ChooseViewScreen : Base.ChooseViewScreen
     {
-        private const string ScreenName = "Choose An Awesome View";
-
-        public ChooseViewScreen() : base(By.XPath($"//android.widget.TextView[@text='{ScreenName}']"), ScreenName)
+        public ChooseViewScreen() : base(By.XPath("//android.widget.TextView[@text='Choose An Awesome View']"))
         {
         }
-
-        public void OpenView(string viewName) => ElementFactory.GetLabel(MobileBy.AccessibilityId(viewName), $"Choose {viewName} view").Click();
     }
 }

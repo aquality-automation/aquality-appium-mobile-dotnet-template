@@ -1,38 +1,21 @@
-﻿using Aquality.Appium.Mobile.Elements.Interfaces;
-using Aquality.Appium.Mobile.Screens;
-using Aquality.Appium.Mobile.Template.Screens.Interfaces;
+﻿using Aquality.Appium.Mobile.Applications;
+using Aquality.Appium.Mobile.Screens.ScreenFactory;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 
 namespace Aquality.Appium.Mobile.Template.Screens.Android
 {
-    public class LoginScreen : AndroidScreen, ILoginScreen
+    [ScreenType(PlatformName.Android)]
+    public sealed class LoginScreen : Base.LoginScreen
     {
-        private const string ScreenName = "Login";
-
-        private readonly ITextBox usernameTxb;
-        private readonly ITextBox passwordTxb;
-        private readonly IButton loginBtn;
-
-        public LoginScreen() : base(By.XPath($"//android.widget.TextView[@text='{ScreenName}']"), ScreenName)
+        public LoginScreen() : base(By.XPath("//android.widget.TextView[@text='Login']"))
         {
-            usernameTxb = ElementFactory.GetTextBox(MobileBy.AccessibilityId("username"), "Username");
-            passwordTxb = ElementFactory.GetTextBox(MobileBy.AccessibilityId("password"), "Password");
-            loginBtn = ElementFactory.GetButton(MobileBy.AccessibilityId("loginBtn"), "Login");
         }
 
-        public ILoginScreen SetUsername(string username)
-        {
-            usernameTxb.SendKeys(username);
-            return this;
-        }
+        protected override By UsernameTxbLoc => MobileBy.AccessibilityId("username");
 
-        public ILoginScreen SetPassword(string password)
-        {
-            passwordTxb.TypeSecret(password);
-            return this;
-        }
+        protected override By PasswordTxbLoc => MobileBy.AccessibilityId("password");
 
-        public void TapLogin() => loginBtn.Click();
+        protected override By LoginBtnLoc => MobileBy.AccessibilityId("loginBtn");
     }
 }

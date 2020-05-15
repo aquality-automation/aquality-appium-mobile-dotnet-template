@@ -1,5 +1,5 @@
 ﻿using Aquality.Appium.Mobile.Screens.ScreenFactory;
-using Aquality.Appium.Mobile.Template.Screens.Interfaces;
+using Aquality.Appium.Mobile.Template.Screens.Base;
 using TechTalk.SpecFlow;
 
 namespace Aquality.Appium.Mobile.Template.SpecFlow.StepDefinitions
@@ -7,11 +7,11 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.StepDefinitions
     [Binding]
     public class ChooseViewSteps
     {
-        private readonly IChooseViewScreen chooseViewScreen;
+        private readonly ChooseViewScreen chooseViewScreen;
 
         public ChooseViewSteps(IScreenFactory screenFactory)
         {
-            chooseViewScreen = screenFactory.GetScreen<IChooseViewScreen>();
+            chooseViewScreen = screenFactory.GetScreen<ChooseViewScreen>();
         }
 
         [Given(@"I open '(.*)' view")]

@@ -1,6 +1,6 @@
 ﻿using Aquality.Appium.Mobile.Screens.ScreenFactory;
 using Aquality.Appium.Mobile.Template.Models;
-using Aquality.Appium.Mobile.Template.Screens.Interfaces;
+using Aquality.Appium.Mobile.Template.Screens.Base;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 
@@ -9,11 +9,11 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.StepDefinitions
     [Binding]
     public class LoginSteps
     {
-        private readonly ILoginScreen loginScreen;
+        private readonly LoginScreen loginScreen;
 
         public LoginSteps(IScreenFactory screenFactory)
         {
-            loginScreen = screenFactory.GetScreen<ILoginScreen>();
+            loginScreen = screenFactory.GetScreen<LoginScreen>();
         }
 
         [When(@"I log in with data:")]
