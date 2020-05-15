@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 
-namespace Aquality.Appium.Mobile.Template.Screens.Base
+namespace Aquality.Appium.Mobile.Template.Screens.Abstractions
 {
     public abstract class ChooseViewScreen : Screen
     {

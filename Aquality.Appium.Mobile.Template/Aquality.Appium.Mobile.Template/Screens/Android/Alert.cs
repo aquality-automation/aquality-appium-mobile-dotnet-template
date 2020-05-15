@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 namespace Aquality.Appium.Mobile.Template.Screens.Android
 {
     [ScreenType(PlatformName.Android)]
-    public sealed class Alert : Base.Alert
+    public sealed class Alert : Abstractions.Alert
     {
         public Alert() : base(By.Id("android:id/alertTitle"))
         {

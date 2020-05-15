@@ -1,5 +1,5 @@
 ﻿using Aquality.Appium.Mobile.Screens.ScreenFactory;
-using Aquality.Appium.Mobile.Template.Screens.Base;
+using Aquality.Appium.Mobile.Template.Screens.Abstractions;
 using TechTalk.SpecFlow;
 
 namespace Aquality.Appium.Mobile.Template.SpecFlow.StepDefinitions

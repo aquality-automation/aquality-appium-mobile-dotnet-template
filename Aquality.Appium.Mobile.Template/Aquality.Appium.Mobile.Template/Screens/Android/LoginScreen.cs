@@ -6,7 +6,7 @@ using OpenQA.Selenium.Appium;
 namespace Aquality.Appium.Mobile.Template.Screens.Android
 {
     [ScreenType(PlatformName.Android)]
-    public sealed class LoginScreen : Base.LoginScreen
+    public sealed class LoginScreen : Abstractions.LoginScreen
     {
         public LoginScreen() : base(By.XPath("//android.widget.TextView[@text='Login']"))
         {

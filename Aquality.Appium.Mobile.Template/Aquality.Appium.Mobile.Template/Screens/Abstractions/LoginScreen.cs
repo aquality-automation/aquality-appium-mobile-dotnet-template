@@ -2,7 +2,7 @@
 using Aquality.Appium.Mobile.Screens;
 using OpenQA.Selenium;
 
-namespace Aquality.Appium.Mobile.Template.Screens.Base
+namespace Aquality.Appium.Mobile.Template.Screens.Abstractions
 {
     public abstract class LoginScreen : Screen
     {

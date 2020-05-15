@@ -6,7 +6,7 @@ using OpenQA.Selenium.Appium;
 namespace Aquality.Appium.Mobile.Template.Screens.IOS
 {
     [ScreenType(PlatformName.IOS)]
-    public sealed class Alert : Base.Alert
+    public sealed class Alert : Abstractions.Alert
     {
         public Alert() : base(MobileBy.IosNSPredicate("type == 'XCUIElementTypeAlert' AND name == 'Alert'"))
         {
