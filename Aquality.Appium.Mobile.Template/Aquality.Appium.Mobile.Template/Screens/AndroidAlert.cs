@@ -2,12 +2,12 @@
 using Aquality.Appium.Mobile.Screens.ScreenFactory;
 using OpenQA.Selenium;
 
-namespace Aquality.Appium.Mobile.Template.Screens.Android
+namespace Aquality.Appium.Mobile.Template.Screens
 {
     [ScreenType(PlatformName.Android)]
-    public sealed class Alert : Abstractions.Alert
+    public sealed class AndroidAlert : Alert
     {
-        public Alert() : base(By.Id("android:id/alertTitle"))
+        public AndroidAlert() : base(By.Id("android:id/alertTitle"))
         {
         }
 

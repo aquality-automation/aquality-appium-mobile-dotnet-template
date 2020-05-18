@@ -3,12 +3,12 @@ using Aquality.Appium.Mobile.Screens.ScreenFactory;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 
-namespace Aquality.Appium.Mobile.Template.Screens.IOS
+namespace Aquality.Appium.Mobile.Template.Screens
 {
     [ScreenType(PlatformName.IOS)]
-    public sealed class Alert : Abstractions.Alert
+    public sealed class IOSAlert : Alert
     {
-        public Alert() : base(MobileBy.IosNSPredicate("type == 'XCUIElementTypeAlert' AND name == 'Alert'"))
+        public IOSAlert() : base(MobileBy.IosNSPredicate("type == 'XCUIElementTypeAlert' AND name == 'Alert'"))
         {
         }
 

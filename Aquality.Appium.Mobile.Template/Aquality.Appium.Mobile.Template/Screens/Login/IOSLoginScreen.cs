@@ -3,12 +3,12 @@ using Aquality.Appium.Mobile.Screens.ScreenFactory;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 
-namespace Aquality.Appium.Mobile.Template.Screens.IOS
+namespace Aquality.Appium.Mobile.Template.Screens.Login
 {
     [ScreenType(PlatformName.IOS)]
-    public sealed class LoginScreen : Abstractions.LoginScreen
+    public sealed class IOSLoginScreen : LoginScreen
     {
-        public LoginScreen() : base(MobileBy.AccessibilityId("Login"))
+        public IOSLoginScreen() : base(MobileBy.AccessibilityId("Login"))
         {
         }
 

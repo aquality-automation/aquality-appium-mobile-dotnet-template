@@ -1,6 +1,6 @@
 ﻿using Aquality.Appium.Mobile.Screens.ScreenFactory;
 using Aquality.Appium.Mobile.Template.Models;
-using Aquality.Appium.Mobile.Template.Screens.Abstractions;
+using Aquality.Appium.Mobile.Template.Screens.Login;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 

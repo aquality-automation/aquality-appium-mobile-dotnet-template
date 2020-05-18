@@ -2,7 +2,7 @@
 using Aquality.Appium.Mobile.Screens;
 using OpenQA.Selenium;
 
-namespace Aquality.Appium.Mobile.Template.Screens.Abstractions
+namespace Aquality.Appium.Mobile.Template.Screens
 {
     public abstract class Alert : Screen
     {
