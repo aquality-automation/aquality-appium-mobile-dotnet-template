@@ -1,5 +1,5 @@
 ﻿using Aquality.Appium.Mobile.Screens.ScreenFactory;
-using Aquality.Appium.Mobile.Template.Screens.Interfaces;
+using Aquality.Appium.Mobile.Template.Screens;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 
@@ -8,11 +8,11 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.StepDefinitions
     [Binding]
     public class CommonSteps
     {
-        private readonly IAlert alert;
+        private readonly Alert alert;
 
         public CommonSteps(IScreenFactory screenFactory)
         {
-            alert = screenFactory.GetScreen<IAlert>();
+            alert = screenFactory.GetScreen<Alert>();
         }
 
         [Then(@"'(.*)' alert appears")]
