@@ -7,8 +7,8 @@
   "driverSettings": {
     "android": {
       "deviceKey": "Android_Emulator",
-      "applicationPath": "./Resources/Applications/TheApp-v1.10.0.apk",
       "capabilities": {
+        "app": "./Resources/Applications/TheApp-v1.10.0.apk",
         "platformName": "Android",
         "automationName": "UiAutomator2",
         "appPackage": "io.cloudgrey.the_app",
@@ -18,8 +18,8 @@
     },
     "ios": {
       "deviceKey": "iOS_Simulator",
-      "applicationPath": "./Resources/Applications/TheApp-v1.10.0.app.zip",
       "capabilities": {
+        "app": "./Resources/Applications/TheApp-v1.10.0.app.zip",
         "platformName": "iOS",
         "automationName": "XCUITest",
         "bundleId": "io.cloudgrey.the-app"
