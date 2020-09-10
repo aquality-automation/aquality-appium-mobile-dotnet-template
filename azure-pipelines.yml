@@ -62,8 +62,6 @@ jobs:
         echo export "ANDROID_HOME=\$ANDROID_HOME" >> ~/.bash_profile
         export PATH=$PATH:$ANDROID_HOME
 
-        apt-get update && apt-get install -y apt-utils libgdiplus libc6-dev
-
         echo "ANDROID_HOME: ${ANDROID_HOME}"
         echo "JAVA_HOME: ${JAVA_HOME}"
         echo "PATH: ${PATH}"
