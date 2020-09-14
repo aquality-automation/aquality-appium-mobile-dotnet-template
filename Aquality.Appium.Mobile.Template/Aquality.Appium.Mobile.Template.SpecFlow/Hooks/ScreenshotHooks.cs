@@ -22,8 +22,7 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
         [AfterScenario(Order = 0)]
         public void TakeScreenshot()
         {
-            if (scenarioContext.ScenarioExecutionStatus != ScenarioExecutionStatus.OK
-                && AqualityServices.IsApplicationStarted)
+            if (AqualityServices.IsApplicationStarted)
             {
                 var pathToScreenshot = screenshotProvider.TakeScreenshot();
                 TestContext.AddTestAttachment(pathToScreenshot);
