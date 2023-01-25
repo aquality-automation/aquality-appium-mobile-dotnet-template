@@ -116,7 +116,7 @@ jobs:
         ios-sim showdevicetypes
         ios-sim start --devicetypeid "$(IOS_SIM_ID)"
         unzip ./Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Applications/TheApp-v1.10.0.app.zip -d ./Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Applications/
-        ios-sim install ./Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Applications/TheApp.app --devicetypeid "$(IOS_SIM_ID)" &
+        ios-sim launch ./Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Applications/TheApp.app --devicetypeid "$(IOS_SIM_ID)" &
         echo "Wait for simulator to be ready"
         sleep 320
     condition: and(succeeded(), eq(variables['platformName'], 'ios'))
