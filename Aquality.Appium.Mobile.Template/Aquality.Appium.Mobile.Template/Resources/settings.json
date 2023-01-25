@@ -19,7 +19,7 @@
     "ios": {
       "deviceKey": "iOS_Simulator",
       "capabilities": {
-        "app": "./Resources/Applications/TheApp.app",
+        "app": "./Resources/Applications/TheApp-v1.10.0.app.zip",
         "platformName": "iOS",
         "automationName": "XCUITest",
         "bundleId": "io.cloudgrey.the-app"
