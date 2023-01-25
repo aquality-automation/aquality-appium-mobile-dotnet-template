@@ -2,8 +2,7 @@
   "iOS_Simulator": {
     "capabilities": {
       "deviceName": "iPhone 11",
-      "platformVersion": "16.2",
-      "isHeadless": true
+      "platformVersion": "16.2"
     }
   },
   "Android_Emulator": {
