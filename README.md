@@ -6,7 +6,7 @@ Template for [aquality-appium-mobile-dotnet](https://github.com/aquality-automat
 
 ### Project structure
 - **Aquality.Appium.Mobile.Template** - project related part with PageObjects, models and utilities
-  - **Configuration/**: classes that used to fetch project config from [Resources/Environment](https://github.com/aquality-automation/aquality-appium-mobile-dotnet-template/blob/master/Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Environment) folder
+  - **Configurations/**: classes that used to fetch project config from [Resources/Environment](https://github.com/aquality-automation/aquality-appium-mobile-dotnet-template/blob/master/Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Environment) folder
   - **Screens/**: Page Objects
   - **Models/**: classes that represent data models of the application under the test
   - **Utilities/**: util classes

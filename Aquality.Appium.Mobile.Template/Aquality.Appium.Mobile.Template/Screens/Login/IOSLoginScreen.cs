@@ -6,9 +6,9 @@ using OpenQA.Selenium.Appium;
 namespace Aquality.Appium.Mobile.Template.Screens.Login
 {
     [ScreenType(PlatformName.IOS)]
-    public sealed class IOSLoginScreen : LoginScreen
+    public sealed class IosLoginScreen : LoginScreen
     {
-        public IOSLoginScreen() : base(MobileBy.AccessibilityId("Login"))
+        public IosLoginScreen() : base(MobileBy.AccessibilityId("Login"))
         {
         }
 

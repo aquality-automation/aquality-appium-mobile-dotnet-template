@@ -9,7 +9,7 @@ namespace Aquality.Appium.Mobile.Template.Screens
         private readonly ILabel messageLbl;
         private readonly IButton okBtn;
 
-        public Alert(By locator) : base(locator, "Alert")
+        protected Alert(By locator) : base(locator, "Alert")
         {
             messageLbl = ElementFactory.GetLabel(MessageLblLoc, "Message");
             okBtn = ElementFactory.GetButton(OkBtnLoc, "OK");
