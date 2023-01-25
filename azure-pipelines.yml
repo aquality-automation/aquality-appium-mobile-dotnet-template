@@ -115,6 +115,7 @@ jobs:
         npm install -g ios-sim@9.0.0
         ios-sim showdevicetypes
         ios-sim start --devicetypeid "$(IOS_SIM_ID)"
+        ios-sim install ./Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Applications/TheApp-v1.10.0.app.zip --devicetypeid "$(IOS_SIM_ID)" &
         echo "Wait for simulator to be ready"
         sleep 240
     condition: and(succeeded(), eq(variables['platformName'], 'ios'))
