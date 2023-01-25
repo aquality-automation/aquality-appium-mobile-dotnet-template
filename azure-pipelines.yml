@@ -103,7 +103,7 @@ jobs:
         $ANDROID_HOME/platform-tools/adb wait-for-device
         while [[ $? -ne 0 ]]; do sleep 1; $ANDROID_HOME/platform-tools/adb shell pm list packages; done;
         $ANDROID_HOME/platform-tools/adb devices
-    condition: and(succeeded(), eq(variables['platformName'], '-'))
+    condition: and(succeeded(), eq(variables['platformName'], 'android'))
 
   - task: CmdLine@2
     displayName: 'Configure XCUITest driver and start iOS simulator'
@@ -129,7 +129,7 @@ jobs:
       script: |
         appium --allow-insecure chromedriver_autodownload  --base-path /wd/hub &
         echo "Appium server started"
-    condition: and(succeeded(), eq(variables['platformName'], 'android'))
+    condition: and(succeeded(), eq(variables['platformName'], '-'))
 
   - task: UseDotNet@2
     displayName: Use .NET 6.0
