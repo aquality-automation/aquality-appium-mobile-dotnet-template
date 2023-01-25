@@ -48,11 +48,9 @@ jobs:
         platformName: android
         ANDROID_EMU_NAME: test
         ANDROID_SDK_ID: system-images;android-28;google_apis_playstore;x86
-        isRemote: false
       IOS:
         platformName: ios
         IOS_SIM_ID: iPhone-11, 16.2
-        isRemote: false
 
   steps:
   - task: CmdLine@2
@@ -117,12 +115,10 @@ jobs:
         npm install -g ios-sim@9.0.0
         ios-sim showdevicetypes
         ios-sim start --devicetypeid "$(IOS_SIM_ID)"
-        unzip ./Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Applications/TheApp-v1.10.0.app.zip -d ./Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Applications/
-        ios-sim install ./Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Applications/TheApp.app --devicetypeid "$(IOS_SIM_ID)" &
         echo "Wait for simulator to be ready"
         sleep 240
     condition: and(succeeded(), eq(variables['platformName'], 'ios'))
-
+    
   - task: CmdLine@2
     displayName: 'Start Appium server'
     inputs:
@@ -140,6 +136,7 @@ jobs:
   - task: DotNetCoreCLI@2
     displayName: 'Run tests'
     env: 
+      isRemote: true
       MSBUILDSINGLELOADCONTEXT: 1  # https://github.com/SpecFlowOSS/SpecFlow/issues/1912
     inputs:
       command: 'test'
