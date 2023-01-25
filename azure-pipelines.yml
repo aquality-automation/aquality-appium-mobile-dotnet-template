@@ -103,7 +103,7 @@ jobs:
         $ANDROID_HOME/platform-tools/adb wait-for-device
         while [[ $? -ne 0 ]]; do sleep 1; $ANDROID_HOME/platform-tools/adb shell pm list packages; done;
         $ANDROID_HOME/platform-tools/adb devices
-    condition: and(succeeded(), eq(variables['platformName'], 'android'))
+    condition: and(succeeded(), eq(variables['platformName'], '-'))
 
   - task: CmdLine@2
     displayName: 'Configure XCUITest driver and start iOS simulator'
@@ -121,7 +121,7 @@ jobs:
         ios-sim install ./Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Applications/TheApp.app --devicetypeid "$(IOS_SIM_ID)" &
         echo "Wait for simulator to be ready"
         sleep 240
-    condition: and(succeeded(), eq(variables['platformName'], '-'))
+    condition: and(succeeded(), eq(variables['platformName'], 'ios'))
 
   - task: CmdLine@2
     displayName: 'Start Appium server'
