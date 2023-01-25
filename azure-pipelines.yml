@@ -125,7 +125,7 @@ jobs:
       script: |
         appium --allow-insecure chromedriver_autodownload  --base-path /wd/hub &
         echo "Appium server started"
-    condition: and(succeeded(), eq(variables['platformName'], '-'))
+    condition: succeeded()
 
   - task: UseDotNet@2
     displayName: Use .NET 6.0
