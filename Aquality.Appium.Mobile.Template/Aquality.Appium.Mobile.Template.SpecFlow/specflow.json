@@ -1,6 +1,5 @@
 ﻿{
   "stepAssemblies": [
-    { "assembly": "Aquality.Appium.Mobile.Template.SpecFlow" },
     { "assembly": "Allure.SpecFlowPlugin" },
     { "assembly": "AqualityTracking.SpecFlowPlugin" }
   ],
