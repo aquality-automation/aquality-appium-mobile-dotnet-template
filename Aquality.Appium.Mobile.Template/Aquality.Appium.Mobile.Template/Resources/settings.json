@@ -1,6 +1,6 @@
 ﻿{
   "platformName": "android",
-  "isRemote": true,
+  "isRemote": false,
   "remoteConnectionUrl": "http://127.0.0.1:4723/wd/hub",
   "screensLocation": "Aquality.Appium.Mobile.Template",
 
@@ -22,13 +22,20 @@
         "app": "./Resources/Applications/TheApp-v1.10.0.app.zip",
         "platformName": "iOS",
         "automationName": "XCUITest",
-        "bundleId": "io.cloudgrey.the-app"
+        "bundleId": "io.cloudgrey.the-app",
+        "wdaLaunchTimeout": 90000,
+        "wdaStartupRetries": 4,
+        "wdaStartupRetryInterval": 20000,
+        "noReset": true,
+        "isHeadless": true,
+        "simulatorStartupTimeout": 300000
       }
     }
   },
   "localServiceSettings": {
     "arguments": {
-      "--allow-insecure": "chromedriver_autodownload"
+      "--allow-insecure": "chromedriver_autodownload",
+      "--backend-retries": "3"
     },
     "capabilities": {
     }
