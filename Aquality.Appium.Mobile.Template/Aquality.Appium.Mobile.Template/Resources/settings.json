@@ -34,8 +34,7 @@
   },
   "localServiceSettings": {
     "arguments": {
-      "--allow-insecure": "chromedriver_autodownload",
-      "--backend-retries": "3"
+      "--allow-insecure": "chromedriver_autodownload"
     },
     "capabilities": {
     }
