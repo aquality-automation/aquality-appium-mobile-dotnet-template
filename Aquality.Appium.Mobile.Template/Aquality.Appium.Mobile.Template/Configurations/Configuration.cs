@@ -1,6 +1,6 @@
 ﻿using Aquality.Selenium.Core.Configurations;
 
-namespace Aquality.Appium.Mobile.Template.Configuration
+namespace Aquality.Appium.Mobile.Template.Configurations
 {
     public static class Configuration
     {

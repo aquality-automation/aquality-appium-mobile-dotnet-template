@@ -6,7 +6,7 @@ namespace Aquality.Appium.Mobile.Template.Screens.ChooseView
 {
     public abstract class ChooseViewScreen : Screen
     {
-        public ChooseViewScreen(By locator) : base(locator, "Choose An Awesome View")
+        protected ChooseViewScreen(By locator) : base(locator, "Choose An Awesome View")
         {
         }
 

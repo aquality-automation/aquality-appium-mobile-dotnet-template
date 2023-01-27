@@ -5,9 +5,9 @@ using OpenQA.Selenium.Appium;
 namespace Aquality.Appium.Mobile.Template.Screens.ChooseView
 {
     [ScreenType(PlatformName.IOS)]
-    public sealed class IOSChooseViewScreen : ChooseViewScreen
+    public sealed class IosChooseViewScreen : ChooseViewScreen
     {
-        public IOSChooseViewScreen() : base(MobileBy.IosNSPredicate($"name == 'Choose An Awesome View'"))
+        public IosChooseViewScreen() : base(MobileBy.IosNSPredicate($"name == 'Choose An Awesome View'"))
         {
         }
     }
