@@ -1,0 +1,1 @@
+[{"uid":"22a16f7eb5933abc","name":"I try to login with invalid credentials","time":{"start":1675883969779,"stop":1675884813232,"duration":843453},"status":"passed","severity":"normal"},{"uid":"e297ea10ef80d03f","name":"I try to login with invalid credentials","time":{"start":1675883889828,"stop":1675884120938,"duration":231110},"status":"passed","severity":"normal"}]
