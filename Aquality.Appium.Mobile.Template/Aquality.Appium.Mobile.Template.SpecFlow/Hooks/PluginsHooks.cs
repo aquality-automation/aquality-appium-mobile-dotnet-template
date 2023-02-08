@@ -1,4 +1,5 @@
 ﻿using Allure.Commons;
+using Aquality.Appium.Mobile.Applications;
 using AqualityTracking.Integrations.Core;
 using NUnit.Framework;
 using System.Text.RegularExpressions;
@@ -10,10 +11,12 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
     public class PluginsHooks
     {
         private readonly ScenarioContext context;
+        private readonly PlatformName platformName;
 
         public PluginsHooks(ScenarioContext context)
         {
             this.context = context;
+            platformName = AqualityServices.ApplicationProfile.PlatformName;
         }
 
         [AfterScenario(Order = -1)]
@@ -23,15 +26,19 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
             AllureLifecycle.Instance.UpdateTestCase(testresult.uuid, testCase =>
             {
                 testCase.name += GetScenarioNameSuffix();
-                testCase.historyId = TestContext.CurrentContext.Test.FullName;
+                testCase.historyId = TestContext.CurrentContext.Test.FullName + platformName;
+                testCase.fullName += GetScenarioNameSuffixWithPlatform();
+                testCase.parameters.Add(new Parameter { name = "platform", value = platformName.ToString() });
             });
         }
 
         [BeforeScenario(Order = -1)]
         public void UpdateAqualityTrackingTestCaseName()
         {
-            AqualityTrackingLifecycle.Instance.UpdateCurrentTest(test => test.Name += GetScenarioNameSuffix());
+            AqualityTrackingLifecycle.Instance.UpdateCurrentTest(test => test.Name += GetScenarioNameSuffixWithPlatform());
         }
+
+        private string GetScenarioNameSuffixWithPlatform() => $"{GetScenarioNameSuffix()}: {platformName}";
 
         private string GetScenarioNameSuffix()
         {
