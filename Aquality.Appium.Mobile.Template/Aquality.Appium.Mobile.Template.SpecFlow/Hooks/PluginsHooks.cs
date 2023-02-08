@@ -1,5 +1,6 @@
 ﻿using Allure.Commons;
 using Aquality.Appium.Mobile.Applications;
+using Aquality.Appium.Mobile.Template.Applications;
 using AqualityTracking.Integrations.Core;
 using NUnit.Framework;
 using System.Text.RegularExpressions;
@@ -17,6 +18,12 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
         {
             this.context = context;
             platformName = AqualityServices.ApplicationProfile.PlatformName;
+        }
+
+        [BeforeFeature]
+        public static void RegisterCustomStartup()
+        {
+            AqualityServices.SetStartup(new CustomStartup());
         }
 
         [AfterScenario(Order = -1)]
@@ -40,7 +47,7 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
 
         private string GetScenarioNameSuffixWithPlatform() => $"{GetScenarioNameSuffix()}: {platformName}";
 
-        private string GetScenarioNameSuffix()
+        private static string GetScenarioNameSuffix()
         {
             var suffix = string.Empty;
             var testFullName = TestContext.CurrentContext.Test.FullName;
