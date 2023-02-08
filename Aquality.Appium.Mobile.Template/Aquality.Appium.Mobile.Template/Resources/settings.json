@@ -45,7 +45,7 @@
     "timeoutImplicit": 0,
     "timeoutCondition": 45,
     "timeoutPollingInterval": 300,
-    "timeoutCommand": 240
+    "timeoutCommand": 400
   },
   "retry": {
     "number": 2,
