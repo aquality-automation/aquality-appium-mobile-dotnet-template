@@ -1,5 +1,6 @@
 [![Build Status](https://dev.azure.com/aquality-automation/aquality-automation/_apis/build/status/aquality-automation.aquality-appium-mobile-dotnet-template?branchName=master)](https://dev.azure.com/aquality-automation/aquality-automation/_build/latest?definitionId=13&branchName=master)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=aquality-automation_aquality-appium-mobile-dotnet-template&metric=alert_status)](https://sonarcloud.io/dashboard?id=aquality-automation_aquality-appium-mobile-dotnet-template)
+[![Allure report](https://github.com/aquality-automation/aquality-appium-mobile-dotnet-template/actions/workflows/test-with-allure-report.yml/badge.svg)](https://aquality-automation.github.io/aquality-appium-mobile-dotnet-template/)
 
 # Aquality Appium Mobile Template Project
 Template for [aquality-appium-mobile-dotnet](https://github.com/aquality-automation/aquality-appium-mobile-dotnet) library.
