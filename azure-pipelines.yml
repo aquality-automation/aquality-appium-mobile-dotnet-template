@@ -115,7 +115,7 @@ jobs:
         npm install -g ios-sim@9.0.0
         ios-sim showdevicetypes
         ios-sim start --devicetypeid "$(IOS_SIM_ID)"
-        $SIM_UID=$( xcrun simctl list | grep -w $IOS_SIM_ID | awk 'match($0, /\(([-0-9A-F]+)\)/) { print substr( $0, RSTART + 1, RLENGTH - 2 )}' )
+        SIM_UID=$( xcrun simctl list | grep -w $IOS_SIM_ID | awk 'match($0, /\(([-0-9A-F]+)\)/) { print substr( $0, RSTART + 1, RLENGTH - 2 )}' )
         xcrun simctl bootstatus $SIM_UID
         unzip ./Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Applications/TheApp-v1.10.0.app.zip -d ./Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Applications/
         ios-sim launch ./Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template/Resources/Applications/TheApp.app --devicetypeid "$(IOS_SIM_ID)" &
