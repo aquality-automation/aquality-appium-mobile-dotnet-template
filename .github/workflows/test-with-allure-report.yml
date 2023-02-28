@@ -87,19 +87,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v1
-        with:
-            dotnet-version: 6.0.x
-
       - name: Install and Run Appium Server
         run: |
           chmod +x ./scripts/PrepareAppiumServerForIos.sh
           ./scripts/PrepareAppiumServerForIos.sh
           
-      - name: Build
-        run: dotnet build ${{ env.SOLUTION_NAME }} -c ${{ env.BUILD_CONFIGURATION }}
-      
       - name: Setup iOS simulator
         if: always()
         uses: futureware-tech/simulator-action@v2
@@ -108,8 +100,18 @@ jobs:
           shutdown_after_job: false
 
       - name: "Wait for simulator to be ready"
-        run: sleep 320
+        run: |
+          SIM_UID="$(xcrun simctl list devices | grep -m 1 "$IOS_SIM_MODEL" | grep -E -o -i "([0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12})")"
+          xcrun simctl bootstatus $SIM_UID
 
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+            dotnet-version: 6.0.x
+
+      - name: Build
+        run: dotnet build ${{ env.SOLUTION_NAME }} -c ${{ env.BUILD_CONFIGURATION }}
+      
       - name: Test against iOS
         if: always()
         id: dotnet_tests
