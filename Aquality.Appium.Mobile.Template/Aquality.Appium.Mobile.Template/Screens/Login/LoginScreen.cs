@@ -6,9 +6,9 @@ namespace Aquality.Appium.Mobile.Template.Screens.Login
 {
     public abstract class LoginScreen : Screen
     {
-        private readonly ITextBox usernameTxb;
-        private readonly ITextBox passwordTxb;
-        private readonly IButton loginBtn;
+        protected readonly ITextBox usernameTxb;
+        protected readonly ITextBox passwordTxb;
+        protected readonly IButton loginBtn;
 
         protected LoginScreen(By locator) : base(locator, "Login")
         {

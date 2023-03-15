@@ -14,7 +14,7 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.StepDefinitions
             chooseViewScreen = screenFactory.GetScreen<ChooseViewScreen>();
         }
 
-        [Given(@"I open '(.*)' view")]
+        [When(@"I open '(.*)' view")]
         public void IOpenView(string viewName)
         {
             chooseViewScreen.OpenView(viewName);
