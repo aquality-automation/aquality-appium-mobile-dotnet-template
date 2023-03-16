@@ -21,5 +21,10 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.StepDefinitions
             Assert.IsTrue(alert.State.WaitForDisplayed(), "Alert appeared");
             Assert.AreEqual(alertMessage, alert.Message, "Alert message is correct");
         }
+
+        [When("I accept the alert")]
+        public void AcceptAlert() {
+            alert.TapOk();
+        }
     }
 }
