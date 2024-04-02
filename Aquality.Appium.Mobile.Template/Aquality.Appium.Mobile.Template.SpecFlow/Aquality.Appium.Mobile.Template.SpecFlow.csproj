@@ -8,12 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="AqualityTracking.SpecFlowPlugin" Version="1.0.1" />
-    <PackageReference Include="nunit" Version="3.13.3" />
+    <PackageReference Include="nunit" Version="3.14.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="SpecFlow" Version="3.9.74" />
     <PackageReference Include="SpecFlow.Allure" Version="3.5.0.73" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />

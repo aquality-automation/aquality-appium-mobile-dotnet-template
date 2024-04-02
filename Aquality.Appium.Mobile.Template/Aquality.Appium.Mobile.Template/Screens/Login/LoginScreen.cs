@@ -1,6 +1,12 @@
-﻿using Aquality.Appium.Mobile.Elements.Interfaces;
+﻿using Aquality.Appium.Mobile.Applications;
+using Aquality.Appium.Mobile.Elements.Interfaces;
 using Aquality.Appium.Mobile.Screens;
+using Aquality.Selenium.Core.Waitings;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Android;
+using OpenQA.Selenium.Appium.Interfaces;
+using System;
 
 namespace Aquality.Appium.Mobile.Template.Screens.Login
 {
@@ -36,5 +42,11 @@ namespace Aquality.Appium.Mobile.Template.Screens.Login
         }
 
         public void TapLogin() => loginBtn.Click();
+
+        public void ClickUsername()
+        {
+            usernameTxb.Click();
+            AqualityServices.ConditionalWait.WaitFor(driver => ((IHidesKeyboard)driver).IsKeyboardShown(), message: "Keyboard is not shown");
+        }
     }
 }
