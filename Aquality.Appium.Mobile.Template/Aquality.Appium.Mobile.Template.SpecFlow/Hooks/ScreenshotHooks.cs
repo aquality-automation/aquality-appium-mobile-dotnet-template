@@ -24,10 +24,21 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
         {
             if (AqualityServices.IsApplicationStarted)
             {
+                if (AqualityServices.Application.PlatformName == PlatformName.IOS)
+                {
+                    var result = AqualityServices.Application.Driver.ExecuteScript("mobile: activeAppInfo");
+                    AqualityServices.LocalizedLogger.Info("loc.checkable.state", System.Text.Json.JsonSerializer.SerializeToDocument(result).ToString());
+                }
                 var pathToScreenshot = screenshotProvider.TakeScreenshot();
                 TestContext.AddTestAttachment(pathToScreenshot);
                 AllureLifecycle.Instance.AddAttachment(pathToScreenshot, "Screenshot");
                 AqualityTrackingLifecycle.Instance.AddAttachment(pathToScreenshot);
+                if (AqualityServices.Application.PlatformName == PlatformName.IOS)
+                {
+                    var result = AqualityServices.Application.Driver.ExecuteScript("mobile: activeAppInfo");
+                    AqualityServices.LocalizedLogger.Info(result.GetType().ToString());
+                    AqualityServices.LocalizedLogger.Info("loc.checkable.state", System.Text.Json.JsonSerializer.SerializeToElement(result).GetProperty("bundleId").ToString());
+                }
             }
         }
     }
