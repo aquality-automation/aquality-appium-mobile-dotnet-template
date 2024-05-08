@@ -4,6 +4,7 @@ using Aquality.Appium.Mobile.Template.Utilities;
 using AqualityTracking.Integrations.Core;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
+using System.Collections.Generic;
 
 namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
 {
@@ -37,7 +38,7 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
                 {
                     var result = AqualityServices.Application.Driver.ExecuteScript("mobile: activeAppInfo");
                     AqualityServices.LocalizedLogger.Info(result.GetType().ToString());
-                    AqualityServices.LocalizedLogger.Info("loc.checkable.state", System.Text.Json.JsonSerializer.SerializeToElement(result).GetProperty("bundleId").ToString());
+                    AqualityServices.LocalizedLogger.Info("loc.checkable.state", ((Dictionary<string, object>)result)["bundleId"].ToString());
                 }
             }
         }
