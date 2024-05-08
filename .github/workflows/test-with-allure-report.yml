@@ -77,7 +77,7 @@ jobs:
       SOLUTION_NAME: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.sln
       ALLURE_RESULTS: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.SpecFlow/bin/ios/Release/net6.0/allure-results
       ENVIRONMENT: ${{ github.event.inputs.environment == '' && 'stage' ||  github.event.inputs.environment }}
-      IOS_SIM_MODEL: iPhone 8
+      IOS_SIM_MODEL: iPhone SE (3rd generation)
 
     concurrency: test-ios-${{ github.event.inputs.environment == '' && 'stage' || github.event.inputs.environment }}
     name: Run tests against iOS
