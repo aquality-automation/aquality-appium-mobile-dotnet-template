@@ -7,14 +7,9 @@ using TechTalk.SpecFlow;
 namespace Aquality.Appium.Mobile.Template.SpecFlow.StepDefinitions
 {
     [Binding]
-    public class LoginSteps
+    public class LoginSteps(IScreenFactory screenFactory)
     {
-        private readonly LoginScreen loginScreen;
-
-        public LoginSteps(IScreenFactory screenFactory)
-        {
-            loginScreen = screenFactory.GetScreen<LoginScreen>();
-        }
+        private readonly LoginScreen loginScreen = screenFactory.GetScreen<LoginScreen>();
 
         [When(@"I log in with data:")]
         public void IFillInLoginForm(LoginModel loginModel)
@@ -27,7 +22,7 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.StepDefinitions
         [Then(@"Login Screen is opened")]
         public void LoginScreenIsOpened()
         {
-            Assert.IsTrue(loginScreen.State.WaitForDisplayed(), "Login Screen is opened");
+            Assert.That(loginScreen.State.WaitForDisplayed(), "Login Screen is opened");
         }
 
         [When(@"I save Login Screen dump")]

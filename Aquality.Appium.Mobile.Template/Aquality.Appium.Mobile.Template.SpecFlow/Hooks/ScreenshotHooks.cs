@@ -8,16 +8,8 @@ using TechTalk.SpecFlow;
 namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
 {
     [Binding]
-    public class ScreenshotHooks
+    public class ScreenshotHooks(IScreenshotProvider screenshotProvider)
     {
-        private readonly ScenarioContext scenarioContext;
-        private readonly IScreenshotProvider screenshotProvider;
-
-        public ScreenshotHooks(ScenarioContext scenarioContext, IScreenshotProvider screenshotProvider)
-        {
-            this.scenarioContext = scenarioContext;
-            this.screenshotProvider = screenshotProvider;
-        }
 
         [AfterScenario(Order = 0)]
         public void TakeScreenshot()

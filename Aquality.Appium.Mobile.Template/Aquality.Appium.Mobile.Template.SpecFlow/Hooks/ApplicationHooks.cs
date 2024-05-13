@@ -1,5 +1,5 @@
-﻿using Aquality.Appium.Mobile.Applications;
-using TechTalk.SpecFlow;
+﻿using TechTalk.SpecFlow;
+using static Aquality.Appium.Mobile.Applications.AqualityServices;
 
 namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
 {
@@ -7,11 +7,12 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
     public class ApplicationHooks
     {
         [AfterScenario(Order = 1)]
-        public void CloseApplication()
+        public static void CloseApplication()
         {
-            if (AqualityServices.IsApplicationStarted)
+            if (IsApplicationStarted)
             {
-                AqualityServices.Application.Quit();
+                Application.Terminate();
+                Application.Quit();
             }
         }
     }

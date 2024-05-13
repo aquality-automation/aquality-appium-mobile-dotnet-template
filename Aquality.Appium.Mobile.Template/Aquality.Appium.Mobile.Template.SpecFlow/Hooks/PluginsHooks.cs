@@ -9,16 +9,9 @@ using TechTalk.SpecFlow;
 namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
 {
     [Binding]
-    public class PluginsHooks
+    public class PluginsHooks(ScenarioContext context)
     {
-        private readonly ScenarioContext context;
-        private readonly PlatformName platformName;
-
-        public PluginsHooks(ScenarioContext context)
-        {
-            this.context = context;
-            platformName = AqualityServices.ApplicationProfile.PlatformName;
-        }
+        private readonly PlatformName platformName = AqualityServices.ApplicationProfile.PlatformName;
 
         [BeforeFeature]
         public static void RegisterCustomStartup()
