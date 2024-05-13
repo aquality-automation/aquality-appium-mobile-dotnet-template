@@ -25,7 +25,7 @@ jobs:
       platformName: android
       BUILD_CONFIGURATION: Release
       SOLUTION_NAME: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.sln
-      ALLURE_RESULTS: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.SpecFlow/bin/android/Release/net6.0/allure-results
+      ALLURE_RESULTS: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.SpecFlow/bin/android/Release/net8.0/allure-results
       ENVIRONMENT: ${{ github.event.inputs.environment == '' && 'stage' ||  github.event.inputs.environment }}
       ANDROID_PROFILE: Nexus 6
       ANDROID_TARGET: google_apis
@@ -34,7 +34,7 @@ jobs:
 
     concurrency: test-android-${{ github.event.inputs.environment == '' && 'stage' || github.event.inputs.environment }}
     name: Run tests against Android
-    runs-on: macos-latest
+    runs-on: macos-12
     outputs:
       dotnet_tests: ${{ steps.dotnet_tests.outcome }}
     steps:
@@ -43,7 +43,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-            dotnet-version: 6.0.x
+            dotnet-version: 8.0.x
 
       - name: Install and Run Appium Server
         run: |
@@ -81,7 +81,7 @@ jobs:
 
     concurrency: test-ios-${{ github.event.inputs.environment == '' && 'stage' || github.event.inputs.environment }}
     name: Run tests against iOS
-    runs-on: macos-latest
+    runs-on: macos-12
     outputs:
       dotnet_tests: ${{ steps.dotnet_tests.outcome }}
     steps:
@@ -107,7 +107,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-            dotnet-version: 6.0.x
+            dotnet-version: 8.0.x
 
       - name: Build
         run: dotnet build ${{ env.SOLUTION_NAME }} -c ${{ env.BUILD_CONFIGURATION }}
