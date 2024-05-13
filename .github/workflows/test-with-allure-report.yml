@@ -22,6 +22,7 @@ on:
 jobs:
   build-and-test-android:
     env:
+      isRemote: true
       platformName: android
       BUILD_CONFIGURATION: Release
       SOLUTION_NAME: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.sln
@@ -72,6 +73,7 @@ jobs:
 
   build-and-test-ios:
     env:
+      isRemote: true
       platformName: ios
       BUILD_CONFIGURATION: Release
       SOLUTION_NAME: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.sln
