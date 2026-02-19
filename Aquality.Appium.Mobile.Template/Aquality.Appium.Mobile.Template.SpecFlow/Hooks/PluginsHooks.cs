@@ -1,4 +1,4 @@
-﻿using Allure.Commons;
+﻿using Allure.Net.Commons;
 using Aquality.Appium.Mobile.Applications;
 using Aquality.Appium.Mobile.Template.Applications;
 using AqualityTracking.Integrations.Core;
@@ -9,7 +9,7 @@ using TechTalk.SpecFlow;
 namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
 {
     [Binding]
-    public class PluginsHooks(ScenarioContext context)
+    public class PluginsHooks()
     {
         private readonly PlatformName platformName = AqualityServices.ApplicationProfile.PlatformName;
 
@@ -22,8 +22,7 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
         [AfterScenario(Order = -1)]
         public void UpdateAllureTestCaseName()
         {
-            context.TryGetValue(out TestResult testresult);
-            AllureLifecycle.Instance.UpdateTestCase(testresult.uuid, testCase =>
+            AllureLifecycle.Instance.UpdateTestCase(testCase =>
             {
                 testCase.name += GetScenarioNameSuffix();
                 testCase.historyId = TestContext.CurrentContext.Test.FullName + platformName;

@@ -1,4 +1,4 @@
-﻿using Allure.Commons;
+﻿using Allure.Net.Commons;
 using Aquality.Appium.Mobile.Applications;
 using Aquality.Appium.Mobile.Template.Utilities;
 using AqualityTracking.Integrations.Core;
@@ -18,7 +18,7 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
             {
                 var pathToScreenshot = screenshotProvider.TakeScreenshot();
                 TestContext.AddTestAttachment(pathToScreenshot);
-                AllureLifecycle.Instance.AddAttachment(pathToScreenshot, "Screenshot");
+                AllureLifecycle.Instance.UpdateTestCase(testCase => testCase.attachments.Add(new Attachment { source = pathToScreenshot, name = "Screenshot" }));
                 AqualityTrackingLifecycle.Instance.AddAttachment(pathToScreenshot);
             }
         }
