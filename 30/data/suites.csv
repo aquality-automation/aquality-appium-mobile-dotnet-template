@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","62234","I try to login with invalid credentials","","Fri Feb 20 15:17:20 UTC 2026","passed","Fri Feb 20 15:18:22 UTC 2026","","","",""
+"","275406","I try to login with invalid credentials","","Fri Feb 20 15:14:57 UTC 2026","broken","Fri Feb 20 15:19:32 UTC 2026","","","",""
