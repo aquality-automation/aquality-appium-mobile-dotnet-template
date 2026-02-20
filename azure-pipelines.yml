@@ -83,13 +83,13 @@ jobs:
             $ANDROID_HOME/platform-tools/adb shell pm list packages >/dev/null 2>&1 && break
             sleep 2
         done
-        if [[ $i -eq 300 ]]; then
+        if [[ $i -ge 300 ]]; then
           echo "Emulator failed to boot in time" >&2
           exit 1
         fi
         $ANDROID_HOME/platform-tools/adb devices
         echo "Emulator started"
-    condition: and(succeeded(), eq(variables['PLATFORM_NAME'], 'android'))
+    condition: and(succeeded(), eq(variables['platformName'], 'android'))
 
   - task: CmdLine@2
     displayName: 'Configuring Appium'
@@ -122,7 +122,7 @@ jobs:
         echo "Appium doctor installed and executed"
 
   - task: CmdLine@2
-    displayName: 'Configure UIA2 driver
+    displayName: 'Configure UIA2 driver'
     inputs:
       script: |
         echo "Installing UIA2 driver"

@@ -3,6 +3,7 @@ using Aquality.Appium.Mobile.Applications;
 using Aquality.Appium.Mobile.Template.Utilities;
 using AqualityTracking.Integrations.Core;
 using NUnit.Framework;
+using System.Xml.Linq;
 using TechTalk.SpecFlow;
 
 namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
@@ -18,7 +19,7 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
             {
                 var pathToScreenshot = screenshotProvider.TakeScreenshot();
                 TestContext.AddTestAttachment(pathToScreenshot);
-                AllureLifecycle.Instance.UpdateTestCase(testCase => testCase.attachments.Add(new Attachment { source = pathToScreenshot, name = "Screenshot" }));
+                AllureApi.AddAttachment(pathToScreenshot, "Screenshot");
                 AqualityTrackingLifecycle.Instance.AddAttachment(pathToScreenshot);
             }
         }
