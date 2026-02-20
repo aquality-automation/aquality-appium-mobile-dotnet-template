@@ -175,6 +175,7 @@ jobs:
         xcrun simctl bootstatus $SIM_UID
         
         echo "Erasing device"
+        xcrun simctl shutdown $SIM_UID 
         xcrun simctl delete unavailable   
         xcrun simctl erase $SIM_UID     
 
