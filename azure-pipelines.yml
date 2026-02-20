@@ -159,11 +159,6 @@ jobs:
           xcrun simctl list devices
           exit 1
         fi
-
-        
-        echo "Erasing device"
-        xcrun simctl delete unavailable   
-        xcrun simctl erase $SIM_UID     
                 
         echo "Resetting CoreSimulator services"
         killall -9 com.apple.CoreSimulator.CoreSimulatorService || true
@@ -173,7 +168,14 @@ jobs:
         npm install -g ios-sim@9.0.0
         ios-sim showdevicetypes
         ios-sim start --devicetypeid "$(IOS_SIM_ID)"
-        echo "Simulator started"
+        echo "Simulator started"        
+        
+        echo "Wait for simulator to be ready"
+        xcrun simctl bootstatus $SIM_UID
+        
+        echo "Erasing device"
+        xcrun simctl delete unavailable   
+        xcrun simctl erase $SIM_UID     
 
         echo "Booting simulator"
         xcrun simctl boot $SIM_UID

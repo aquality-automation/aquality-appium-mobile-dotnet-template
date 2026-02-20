@@ -1,8 +1,10 @@
 ﻿using Allure.Net.Commons;
 using Aquality.Appium.Mobile.Applications;
 using Aquality.Appium.Mobile.Template.Applications;
+using Aquality.Selenium.Core.Utilities;
 using AqualityTracking.Integrations.Core;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 
@@ -17,6 +19,7 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
         public static void RegisterCustomStartup()
         {
             AqualityServices.SetStartup(new CustomStartup());
+            AqualityServices.Get<IActionRetrier>().DoWithRetry(() => AqualityServices.Application.GetType(), [typeof(UnknownErrorException)]);
         }
 
         [AfterScenario(Order = -1)]
