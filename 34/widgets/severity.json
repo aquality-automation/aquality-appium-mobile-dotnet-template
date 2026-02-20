@@ -1,0 +1,1 @@
+[{"uid":"a460c922e5c5e9d3","name":"Feature hook failure placeholder","time":{"start":1771617473212,"stop":1771617473212,"duration":0},"status":"broken","severity":"normal"},{"uid":"3447af50a819090e","name":"I try to login with invalid credentials","time":{"start":1771616457996,"stop":1771616473004,"duration":15008},"status":"passed","severity":"normal"}]
