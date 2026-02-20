@@ -19,7 +19,7 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
         public static void RegisterCustomStartup()
         {
             AqualityServices.SetStartup(new CustomStartup());
-            AqualityServices.Get<IActionRetrier>().DoWithRetry(() => AqualityServices.Application.GetType(), [typeof(UnknownErrorException)]);
+            AqualityServices.Get<IActionRetrier>().DoWithRetry(AqualityServices.Application.GetType, [typeof(UnknownErrorException)]);
         }
 
         [AfterScenario(Order = -1)]

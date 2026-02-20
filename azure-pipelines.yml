@@ -105,9 +105,6 @@ jobs:
         echo "PATH: ${PATH}"
 
         echo "Installing Appium"
-        npm install -g appium@3
-        ln -fs /usr/local/lib/node_modules/appium/build/lib/main.js /usr/local/bin/appium
-        chmod +x /usr/local/bin/appium
         export PATH=$PATH:/usr/local/bin/appium
         appium --version
         echo "Appium installed"

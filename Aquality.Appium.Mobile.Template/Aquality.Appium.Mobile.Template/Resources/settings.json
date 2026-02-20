@@ -36,7 +36,8 @@
   },
   "localServiceSettings": {
     "arguments": {
-      "--allow-insecure": "uiautomator2:chromedriver_autodownload"
+      "--allow-insecure": "uiautomator2:chromedriver_autodownload",
+      "--backend-retries": "5"
     },
     "capabilities": {
     }
@@ -48,7 +49,7 @@
     "timeoutCommand": 400
   },
   "retry": {
-    "number": 3,
+    "number": 2,
     "pollingInterval": 300
   },
   "logger": {
