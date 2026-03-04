@@ -26,7 +26,7 @@ jobs:
       platformName: android
       BUILD_CONFIGURATION: Release
       SOLUTION_NAME: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.sln
-      ALLURE_RESULTS: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.SpecFlow/bin/android/Release/net8.0/allure-results
+      ALLURE_RESULTS: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.SpecFlow/bin/android/Release/net10.0/allure-results
       ENVIRONMENT: ${{ github.event.inputs.environment == '' && 'stage' ||  github.event.inputs.environment }}
       ANDROID_PROFILE: Nexus 6
       ANDROID_TARGET: google_apis
@@ -35,16 +35,44 @@ jobs:
 
     concurrency: test-android-${{ github.event.inputs.environment == '' && 'stage' || github.event.inputs.environment }}
     name: Run tests against Android
-    runs-on: macos-12
+    runs-on: ubuntu-latest
     outputs:
       dotnet_tests: ${{ steps.dotnet_tests.outcome }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v5
         with:
-            dotnet-version: 8.0.x
+            dotnet-version: 10.0.x
+            
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: AVD cache
+        uses: actions/cache@v4
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ env.ANDROID_API_LEVEL }}-${{ env.ANDROID_TARGET }}-${{ env.ANDROID_ARCH }}-${{ env.ANDROID_PROFILE }}
+
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ env.ANDROID_API_LEVEL }}
+          target: ${{ env.ANDROID_TARGET }}
+          arch: ${{ env.ANDROID_ARCH }}
+          profile: ${{ env.ANDROID_PROFILE }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
 
       - name: Install and Run Appium Server
         run: |
@@ -62,6 +90,9 @@ jobs:
           target: ${{ env.ANDROID_TARGET }}
           arch: ${{ env.ANDROID_ARCH }}
           profile: ${{ env.ANDROID_PROFILE }}
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
           script: dotnet test --no-build ${{ env.SOLUTION_NAME }} -c ${{ env.BUILD_CONFIGURATION }}
 
       - name: Upload results as artifacts
@@ -77,17 +108,18 @@ jobs:
       platformName: ios
       BUILD_CONFIGURATION: Release
       SOLUTION_NAME: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.sln
-      ALLURE_RESULTS: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.SpecFlow/bin/ios/Release/net8.0/allure-results
-      ENVIRONMENT: ${{ github.event.inputs.environment == '' && 'stage' ||  github.event.inputs.environment }}
-      IOS_SIM_MODEL: iPhone 8
+      ALLURE_RESULTS: Aquality.Appium.Mobile.Template/Aquality.Appium.Mobile.Template.SpecFlow/bin/ios/Release/net10.0/allure-results
+      ENVIRONMENT: ${{ github.event.inputs.environment == '' && 'stage' ||  github.event.inputs.environment }}  
+      IOS_SIM_MODEL: iPhone SE (3rd generation)
+      IOS_SIM_OS_VERSION: '17.0'
 
     concurrency: test-ios-${{ github.event.inputs.environment == '' && 'stage' || github.event.inputs.environment }}
     name: Run tests against iOS
-    runs-on: macos-12
+    runs-on: macos-14
     outputs:
       dotnet_tests: ${{ steps.dotnet_tests.outcome }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Install and Run Appium Server
         run: |
@@ -99,6 +131,7 @@ jobs:
         uses: futureware-tech/simulator-action@v2
         with:
           model: ${{ env.IOS_SIM_MODEL }}
+          os_version:  ${{ env.IOS_SIM_OS_VERSION }}
           shutdown_after_job: false
 
       - name: "Wait for simulator to be ready"
@@ -107,9 +140,9 @@ jobs:
           xcrun simctl bootstatus $SIM_UID
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v5
         with:
-            dotnet-version: 8.0.x
+            dotnet-version: 10.0.x
 
       - name: Build
         run: dotnet build ${{ env.SOLUTION_NAME }} -c ${{ env.BUILD_CONFIGURATION }}
@@ -135,7 +168,7 @@ jobs:
       GH_PAGES_URL: https://aquality-automation.github.io/aquality-appium-mobile-dotnet-template
     steps:
       - name: Get Allure history
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         if: always()
         continue-on-error: true
         with:

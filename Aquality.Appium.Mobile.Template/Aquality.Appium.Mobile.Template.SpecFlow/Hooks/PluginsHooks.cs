@@ -1,15 +1,17 @@
-﻿using Allure.Commons;
+﻿using Allure.Net.Commons;
 using Aquality.Appium.Mobile.Applications;
 using Aquality.Appium.Mobile.Template.Applications;
+using Aquality.Selenium.Core.Utilities;
 using AqualityTracking.Integrations.Core;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 
 namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
 {
     [Binding]
-    public class PluginsHooks(ScenarioContext context)
+    public class PluginsHooks()
     {
         private readonly PlatformName platformName = AqualityServices.ApplicationProfile.PlatformName;
 
@@ -17,13 +19,13 @@ namespace Aquality.Appium.Mobile.Template.SpecFlow.Hooks
         public static void RegisterCustomStartup()
         {
             AqualityServices.SetStartup(new CustomStartup());
+            AqualityServices.Get<IActionRetrier>().DoWithRetry(AqualityServices.Application.GetType, [typeof(UnknownErrorException)]);
         }
 
         [AfterScenario(Order = -1)]
         public void UpdateAllureTestCaseName()
         {
-            context.TryGetValue(out TestResult testresult);
-            AllureLifecycle.Instance.UpdateTestCase(testresult.uuid, testCase =>
+            AllureLifecycle.Instance.UpdateTestCase(testCase =>
             {
                 testCase.name += GetScenarioNameSuffix();
                 testCase.historyId = TestContext.CurrentContext.Test.FullName + platformName;
